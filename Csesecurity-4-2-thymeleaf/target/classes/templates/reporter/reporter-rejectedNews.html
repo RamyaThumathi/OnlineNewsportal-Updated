@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rejected News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #d9534f;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .action-btn {
+            padding: 6px 10px;
+            border-radius: 5px;
+            border: none;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+        .edit-btn {
+            background-color: #007bff;
+        }
+        .resubmit-btn {
+            background-color: #28a745;
+        }
+        .no-news {
+            text-align: center;
+            color: #555;
+            margin-top: 30px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #6c757d;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .back-link:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Your Rejected News</h1>
+
+    <div th:if="${#lists.isEmpty(rejectedNews)}" class="no-news">
+        <p>No rejected news found.</p>
+    </div>
+
+    <table th:if="${!#lists.isEmpty(rejectedNews)}">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="news : ${rejectedNews}">
+                <td th:text="${news.title}">Title</td>
+                <td th:text="${news.content}">Content</td>
+                <td th:text="${news.newsType}">Type</td>
+                <td>
+                    <!-- Edit -->
+                    <a th:href="@{/reporter/edit-news/{id}(id=${news.id})}" class="action-btn edit-btn">Edit</a>
+                    
+                    <!-- Resubmit -->
+                    <form th:action="@{/reporter/resubmit-news/{id}(id=${news.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="action-btn resubmit-btn">Resubmit</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/reporter/dashboard}" class="back-link">⬅ Back to Dashboard</a>
+</div>
+</body>
+</html>

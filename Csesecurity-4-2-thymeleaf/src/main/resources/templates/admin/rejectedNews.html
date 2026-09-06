@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"><title>Rejected News</title>
+<style>
+body{font-family:'Poppins',sans-serif;background:#fff0f0;margin:0;}
+header{background:#dc3545;color:white;padding:20px;text-align:center;font-size:26px;}
+.container{width:90%;margin:30px auto;}
+table{width:100%;border-collapse:collapse;background:white;border-radius:10px;overflow:hidden;}
+th{background:#dc3545;color:white;padding:12px;}
+td{padding:12px;text-align:center;border-bottom:1px solid #ddd;}
+tr:hover{background:#fff8f8;}
+img{max-width:100px;border-radius:10px;}
+</style>
+</head>
+<body>
+<header>❌ Rejected News</header>
+<div class="container">
+<table>
+<thead><tr><th>ID</th><th>Title</th><th>Reporter</th><th>Type</th><th>Reason (Optional)</th></tr></thead>
+<tbody>
+<tr th:each="news : ${rejectedNews}">
+<td th:text="${news.id}"></td>
+<td th:text="${news.title}"></td>
+<td th:text="${news.author}"></td>
+<td th:text="${news.newsType}"></td>
+<td>Update needed by reporter</td>
+</tr>
+<tr th:if="${rejectedNews.isEmpty()}">
+<td colspan="5" style="text-align:center;color:gray;">No rejected news</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

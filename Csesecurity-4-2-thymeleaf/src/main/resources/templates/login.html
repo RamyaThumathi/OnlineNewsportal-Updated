@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | News Portal</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 50px;
+            width: 350px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: #fff;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #f0f0f0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            box-shadow: 0 0 8px #5f9df7;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 25px;
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #43e97b, #38f9d7);
+        }
+
+        p {
+            margin-top: 20px;
+            color: #d6d6d6;
+        }
+
+        a {
+            color: #00f2fe;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="login-box">
+    <h2>News Portal Login</h2>
+
+    <form th:action="@{/login}" method="post">
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="Enter your username" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div th:if="${param.error}" class="message" style="color:#ff7b7b;">Invalid username or password</div>
+    <div th:if="${param.logout}" class="message" style="color:#7bff8a;">You have been logged out</div>
+
+    <p>Don't have an account? <a th:href="@{/register}">Register here</a></p>
+</div>
+</body>
+</html>

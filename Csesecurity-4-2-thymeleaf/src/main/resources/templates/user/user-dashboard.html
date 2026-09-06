@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f7fa;
+            padding: 20px;
+        }
+
+        .news-box {
+            width: 70%;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .news-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Floating Arrows */
+        .arrow-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 45px;
+            color: #333;
+            text-decoration: none;
+            background: rgba(255,255,255,0.8);
+            padding: 10px 16px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        .arrow-left { left: 20px; }
+        .arrow-right { right: 20px; }
+
+        .arrow-btn:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .search-bar input {
+            width: 60%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #aaa;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            padding: 10px 18px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            border-radius: 8px;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background: #0056b3;
+        }
+
+        .error-msg {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+        }
+
+        /* ✅ Logout Button */
+        .logout {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .logout a {
+            font-size: 18px;
+            text-decoration: none;
+            background: #dc3545;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .logout a:hover {
+            background: #b52a38;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- ✅ LOGOUT BUTTON -->
+<div class="logout">
+    <a th:href="@{/logout}">Logout</a>
+</div>
+
+<!-- LEFT ARROW -->
+<a th:if="${prev != null}"
+   th:href="@{/user/dashboard(id=${prev.id})}"
+   class="arrow-btn arrow-left">
+    &#8249;
+</a>
+
+<!-- RIGHT ARROW -->
+<a th:if="${next != null}"
+   th:href="@{/user/dashboard(id=${next.id})}"
+   class="arrow-btn arrow-right">
+    &#8250;
+</a>
+
+<div class="news-box">
+
+    <!-- ✅ SEARCH BAR AT TOP -->
+    <div class="search-bar">
+        <form th:action="@{/user/dashboard}" method="get">
+            <input type="text" name="keyword" placeholder="Search news by title..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- ✅ ERROR MESSAGE -->
+    <p class="error-msg" th:if="${error}" th:text="${error}"></p>
+
+    <!-- ✅ NEWS CONTENT -->
+    <h1 th:text="${news.title}"></h1>
+
+    <img th:src="@{/user/news/image/{id}(id=${news.id})}"
+         class="news-image"/>
+
+    <p th:text="${news.content}" style="font-size: 17px; line-height: 1.6;"></p>
+
+</div>
+
+</body>
+</html>

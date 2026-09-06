@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fef6f6;
+            padding: 40px;
+        }
+        .container {
+            width: 450px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(255,0,0,0.2);
+        }
+        h2 {
+            color: #d9534f;
+        }
+        p {
+            font-size: 16px;
+            color: #333;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+        }
+        .delete-btn { background-color: #d9534f; }
+        .cancel-btn { background-color: #6c757d; }
+        a { color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete this news?</p>
+
+    <h4 th:text="'Title: ' + ${news.title}"></h4>
+    <p th:text="${news.content}"></p>
+
+    <form th:action="@{/reporter/delete-news/{id}(id=${news.id})}" method="post">
+        <button type="submit" class="delete-btn">Yes, Delete</button>
+        <button type="button" class="cancel-btn">
+            <a th:href="@{/reporter/dashboard}">Cancel</a>
+        </button>
+    </form>
+</div>
+</body>
+</html>

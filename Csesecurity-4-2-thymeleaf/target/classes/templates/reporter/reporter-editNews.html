@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit News</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], textarea, input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: inline-block;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit News</h1>
+
+    <form th:action="@{/reporter/update-news/{id}(id=${news.id})}" 
+          method="post" 
+          th:object="${news}" 
+          enctype="multipart/form-data">
+
+        <label>Title:</label>
+        <input type="text" th:field="*{title}" required />
+
+        <label>Content:</label>
+        <textarea rows="5" th:field="*{content}" required></textarea>
+
+        <label>News Type:</label>
+        <input type="text" th:field="*{newsType}" placeholder="Politics / Sports / Tech" required />
+
+        <label>Update Image (optional):</label>
+        <input type="file" name="imageFile" accept="image/*" />
+
+        <button type="submit">Update News</button>
+    </form>
+
+    <a th:href="@{/reporter/dashboard}">⬅ Back to Dashboard</a>
+</div>
+</body>
+</html>

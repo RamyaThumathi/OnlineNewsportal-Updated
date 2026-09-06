@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav {
+            background-color: #e9ecef;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            background: #007bff;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: #0056b3;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+        }
+
+        .logout-btn:hover {
+            background-color: #a71d2a;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+
+        .card h2 {
+            margin: 10px 0;
+            font-size: 32px;
+            color: #007bff;
+        }
+
+        .pending {
+            color: #ffc107;
+        }
+
+        .approved {
+            color: #28a745;
+        }
+
+        .rejected {
+            color: #dc3545;
+        }
+
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5faff;
+        }
+
+        button {
+            border: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .approve-btn {
+            background-color: #28a745;
+        }
+
+        .approve-btn:hover {
+            background-color: #218838;
+        }
+
+        .reject-btn {
+            background-color: #dc3545;
+        }
+
+        .reject-btn:hover {
+            background-color: #a71d2a;
+        }
+    </style>
+</head>
+
+<body>
+    <header>📰 Admin Dashboard</header>
+
+    <nav>
+        <div class="nav-links">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/approved}">Approved News</a>
+            <a th:href="@{/admin/rejected}">Rejected News</a>
+        </div>
+        <div>
+            <a th:href="@{/logout}" class="nav-links logout-btn">🔒 Logout</a>
+        </div>
+    </nav>
+
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="card">
+            <h3>Pending</h3>
+            <h2 class="pending" th:text="${pendingCount}">0</h2>
+        </div>
+        <div class="card">
+            <h3>Approved</h3>
+            <h2 class="approved" th:text="${approvedCount}">0</h2>
+        </div>
+        <div class="card">
+            <h3>Rejected</h3>
+            <h2 class="rejected" th:text="${rejectedCount}">0</h2>
+        </div>
+    </div>
+
+    <!-- Pending News Table -->
+    <h2 style="text-align:center; margin-top:30px;">🕓 Pending News for Approval</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Reporter</th>
+                <th>Type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="news : ${pendingNews}">
+                <td th:text="${news.id}"></td>
+                <td th:text="${news.title}"></td>
+                <td th:text="${news.author}"></td>
+                <td th:text="${news.newsType}"></td>
+                <td>
+                    <form th:action="@{/admin/approve/{id}(id=${news.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="approve-btn">Approve</button>
+                    </form>
+                    <form th:action="@{/admin/reject/{id}(id=${news.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="reject-btn">Reject</button>
+                    </form>
+                </td>
+            </tr>
+
+            <tr th:if="${pendingNews.isEmpty()}">
+                <td colspan="5" style="color:gray;">No pending news available</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,173 @@
+@charset "UTF-8";
+/* ===== General Styles ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #118ab2;
+}
+
+a:hover {
+    color: #06d6a0;
+}
+
+/* ===== Header ===== */
+header {
+    background-color: #118ab2;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header nav span {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+header nav form button {
+    background-color: #06d6a0;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+header nav form button:hover {
+    background-color: #073b4c;
+}
+
+/* ===== Main Content ===== */
+main {
+    padding: 30px;
+}
+
+h2, h3 {
+    color: #118ab2;
+    margin-bottom: 20px;
+}
+
+/* ===== Dashboard Cards ===== */
+.dashboard-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 200px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.dashboard-card h3 {
+    margin: 0;
+    color: #06d6a0;
+    font-size: 20px;
+}
+
+.dashboard-card p {
+    font-size: 16px;
+    margin: 5px 0 0;
+}
+
+/* ===== Tables ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #06d6a0;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #e0f7fa;
+}
+
+/* ===== Buttons ===== */
+.btn {
+    display: inline-block;
+    background-color: #118ab2;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #06d6a0;
+}
+
+/* ===== Forms ===== */
+form {
+    margin-top: 20px;
+}
+
+input[type="text"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+input[type="submit"] {
+    width: auto;
+    background-color: #118ab2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover {
+    background-color: #06d6a0;
+}
+
+/* ===== Images in Table ===== */
+.news-image {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}

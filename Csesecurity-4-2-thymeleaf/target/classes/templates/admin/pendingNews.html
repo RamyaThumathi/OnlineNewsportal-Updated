@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pending News</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .btn { padding: 5px 10px; border: none; border-radius: 4px; color: white; cursor: pointer; }
+        .approve { background-color: green; }
+        .reject { background-color: red; }
+    </style>
+</head>
+<body>
+<h1>Pending News</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Reporter</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="news : ${pendingNews}">
+            <td th:text="${news.title}"></td>
+            <td th:text="${news.reporterName}"></td>
+            <td th:text="${#dates.format(news.date,'dd-MM-yyyy')}"></td>
+            <td>
+                <form th:action="@{/admin/approve/{id}(id=${news.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn approve">Approve</button>
+                </form>
+                <form th:action="@{/admin/reject/{id}(id=${news.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn reject">Reject</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/admin/dashboard}">Back to Dashboard</a>
+</body>
+</html>

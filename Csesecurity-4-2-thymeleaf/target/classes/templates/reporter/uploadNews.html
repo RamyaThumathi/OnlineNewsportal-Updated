@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload News</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        label { display: block; margin-top: 10px; }
+        input, textarea { width: 50%; padding: 5px; margin-top: 5px; }
+        button { margin-top: 15px; padding: 8px 15px; }
+    </style>
+</head>
+<body>
+
+    <h1>Upload News</h1>
+
+    <form th:action="@{/reporter/upload}" th:object="${news}" method="post" enctype="multipart/form-data">
+        <label>Title:</label>
+        <input type="text" th:field="*{title}" required/>
+
+        <label>Content:</label>
+        <textarea th:field="*{content}" rows="6" required></textarea>
+
+        <label>News Type:</label>
+        <input type="text" th:field="*{newsType}" required/>
+
+        <label>Upload Image:</label>
+        <input type="file" name="imageFile" accept="image/*"/>
+
+        <button type="submit">Upload News</button>
+    </form>
+
+    <br/>
+    <a th:href="@{/reporter/dashboard}">Back to Dashboard</a>
+
+</body>
+</html>
